@@ -1,4 +1,4 @@
-# ShopZen — Online Store Homepage
+# ShopHub — Online Store Homepage
 
 A dynamic, responsive online store homepage built as part of a 10-day internship project. Features categorized product listings, interactive filters, sorting, search, cart, and wishlist — all in a single HTML file with zero dependencies beyond Google Fonts.
 
@@ -129,4 +129,4 @@ Inspired by modern e-commerce UI patterns.
 
 ---
 
-*ShopZen — Everything you need, delivered to your door.* 🛍️
+*ShopHub — Everything you need, delivered to your door.* 🛍️
