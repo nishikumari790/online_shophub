@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopHub — Modern Online Store</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">Shop<span>Hub</span></a>
+
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="16.5" y1="16.5" x2="22" y2="22"/>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Search products…" />
+      </div>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <!-- Mobile Filters Toggle -->
+        <button class="sidebar-toggle" onclick="openSidebar()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="4" y1="6"  x2="20" y2="6"/>
+            <line x1="4" y1="12" x2="14" y2="12"/>
+            <line x1="4" y1="18" x2="18" y2="18"/>
+          </svg>
+          Filters
+        </button>
+
+        <!-- Cart Button -->
+        <button class="cart-btn" onclick="showToast('Cart opened!')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 01-8 0"/>
+          </svg>
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile overlay (closes sidebar when clicked) -->
+  <div id="overlay" onclick="closeSidebar()"></div>
+
+
+  <!-- HERO BANNER -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="hero-badge">🔥 Summer Sale — Up to 50% off</span>
+        <h1 class="hero-title">
+          Everything you<br/>
+          need, <em>delivered</em><br/>
+          to your door.
+        </h1>
+        <p class="hero-sub">
+          Discover thousands of curated products across
+          Electronics, Fashion, Home &amp; Books.
+        </p>
+        <a href="#products" class="hero-cta">
+          Shop Now
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Hero Stats -->
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="num">12K+</span>
+          <span class="label">Products</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">98%</span>
+          <span class="label">Satisfaction</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">3M+</span>
+          <span class="label">Customers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MAIN LAYOUT -->
+  <div class="main-layout" id="products">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar" id="sidebar">
+
+      <!-- Category Filter -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Categories</div>
+        <ul class="category-list" id="sidebarCatList">
+          <li class="active" data-cat="all" onclick="setSidebarCat(this)">
+            <span class="cat-icon">🛍️</span> All Products
+            <span class="cat-count">24</span>
+          </li>
+          <li data-cat="Electronics" onclick="setSidebarCat(this)">
+            <span class="cat-icon">⚡</span> Electronics
+            <span class="cat-count">8</span>
+          </li>
+          <li data-cat="Fashion" onclick="setSidebarCat(this)">
+            <span class="cat-icon">👗</span> Fashion
+            <span class="cat-count">6</span>
+          </li>
+          <li data-cat="Home Appliances" onclick="setSidebarCat(this)">
+            <span class="cat-icon">🏠</span> Home Appliances
+            <span class="cat-count">5</span>
+          </li>
+          <li data-cat="Books" onclick="setSidebarCat(this)">
+            <span class="cat-icon">📚</span> Books
+            <span class="cat-count">5</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Price Range Filter -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Price Range</div>
+        <div class="price-range-labels">
+          <span>$0</span>
+          <span>Up to <strong id="priceLabel">$500</strong></span>
+        </div>
+        <input
+          type="range"
+          id="priceSlider"
+          min="0" max="500" value="500" step="10"
+          oninput="updatePrice(this.value)"
+        />
+      </div>
+
+      <!-- Rating Filter -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Min. Rating</div>
+        <div class="rating-opts">
+          <div class="rating-opt active" data-rating="0" onclick="setRating(this)">
+            <span class="stars">★★★★★</span> Any rating
+          </div>
+          <div class="rating-opt" data-rating="4" onclick="setRating(this)">
+            <span class="stars">★★★★☆</span> 4 &amp; above
+          </div>
+          <div class="rating-opt" data-rating="4.5" onclick="setRating(this)">
+            <span class="stars">★★★★★</span> 4.5 &amp; above
+          </div>
+        </div>
+      </div>
+
+      <!-- Clear Filters -->
+      <button class="clear-btn" onclick="clearFilters()">Clear all filters</button>
+
+      <!-- Mobile: Close Sidebar -->
+      <button class="sidebar-close" onclick="closeSidebar()">Close filters</button>
+    </aside>
+
+
+    <!-- ── PRODUCTS AREA ── -->
+    <div class="products-area">
+
+      <!-- Header: Title + Sort -->
+      <div class="products-header">
+        <div>
+          <div class="products-title" id="productsTitle">All Products</div>
+          <div class="products-subtitle" id="productsSubtitle">Showing 24 products</div>
+        </div>
+        <div class="sort-bar">
+          <span class="sort-label">Sort by:</span>
+          <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+            <option value="default">Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating-desc">Rating: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Category Tab Pills -->
+      <div class="cat-tabs" id="catTabs">
+        <button class="cat-tab active" data-cat="all"             onclick="setTabCat(this)">🛍️ All</button>
+        <button class="cat-tab"        data-cat="Electronics"     onclick="setTabCat(this)">⚡ Electronics</button>
+        <button class="cat-tab"        data-cat="Fashion"         onclick="setTabCat(this)">👗 Fashion</button>
+        <button class="cat-tab"        data-cat="Home Appliances" onclick="setTabCat(this)">🏠 Home</button>
+        <button class="cat-tab"        data-cat="Books"           onclick="setTabCat(this)">📚 Books</button>
+      </div>
+
+      <!-- Product Grid — populated by script.js -->
+      <div class="product-grid" id="productGrid"></div>
+
+    </div>
+  </div><!-- /main-layout -->
+
+
+  <!-- Toast Notification -->
+  <div id="toast"></div>
+
+
+  <!--FOOTER-->
+  <footer>
+    &copy; 2025 ShopZen. Crafted with care for your internship project. ✨
+  </footer>
+
+
+  <!-- External JavaScript — loaded last so DOM is ready -->
+  <script src="script.js"></script>
+
+</body>
+</html>
