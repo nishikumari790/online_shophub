@@ -4,12 +4,6 @@ A dynamic, responsive online store homepage built as part of a 10-day internship
 
 ---
 
-## 🔗 Live Demo
-
-> Deploy to GitHub Pages / Netlify / Vercel — instructions below.
-
----
-
 ## 📋 Project Overview
 
 ShopZen is a fully client-side online store homepage demonstrating:
@@ -36,32 +30,7 @@ ShopZen is a fully client-side online store homepage demonstrating:
 | Google Fonts (Syne + DM Sans) | Typography |
 | Unsplash | Product placeholder images |
 
-> No frameworks, no build tools — pure HTML/CSS/JS. Open the file directly in any browser.
-
----
-
-## 🚀 How to Run
-
-### Option 1 — Open directly
-```bash
-# Just double-click index.html, or:
-open index.html
-```
-
-### Option 2 — Local dev server (recommended)
-```bash
-# Using Python
-python -m http.server 3000
-# Then open http://localhost:3000
-
-# Using Node.js (npx)
-npx serve .
-# Then open http://localhost:3000
-```
-
-### Option 3 — VS Code Live Server
-1. Install the **Live Server** extension in VS Code
-2. Right-click `index.html` → **Open with Live Server**
+> No frameworks, no build tools — pure HTML/CSS/JS. 
 
 ---
 
@@ -82,17 +51,6 @@ shopzen/
 2. Go to **Settings → Pages**
 3. Set source to **main branch / root**
 4. Your site will be live at `https://<username>.github.io/<repo>/`
-
-### Netlify
-1. Drag and drop the project folder onto [netlify.com/drop](https://app.netlify.com/drop)
-2. Instant deploy — no signup needed for basic hosting
-
-### Vercel
-```bash
-npm i -g vercel
-vercel
-# Follow the prompts — done in ~30 seconds
-```
 
 ---
 
@@ -149,7 +107,6 @@ vercel
 |---|---|
 | Keeping sidebar + tabs in sync | Single `state.category` variable, both UI elements read/write it |
 | Responsive sidebar on mobile | CSS `position: fixed` + overlay, toggled via JS class |
-| Smooth re-render without React | Full `innerHTML` replace on each filter — fast enough for 24 items |
 | Search debounce | `clearTimeout` / `setTimeout` pattern (280ms) |
 | Product images | Unsplash URLs with `?w=400&q=80` for fast loading |
 
